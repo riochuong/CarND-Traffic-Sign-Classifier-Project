@@ -18,9 +18,9 @@ Below is the historams shows the distribution of the data for each type of traff
 
 
 
-![alt text][train_data.png]
-![alt text][test_data.png]
-![alt text][valid_data.png]
+![alt text](./train_data.png)
+![alt text](./test_data.png)
+![alt text](./valid_data.png)
 
 ### Design and Test a Model Architecture
 
