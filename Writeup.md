@@ -27,6 +27,7 @@ Below is the historams shows the distribution of the data for each type of traff
 #### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
 
 First, convert all data from RGB to grayscale in order to greatly reduce number of unneccessary features so the training time can be faster. The network can then focus on learning the correct pattern from the single feature map.
+
 ![alt text](before.png)
 ![alt text](after.png)
 
