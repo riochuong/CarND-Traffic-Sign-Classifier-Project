@@ -7,7 +7,7 @@
 I used numpy to explore the characteristics of the data:
 
 * The size of training set is **34799**
-* The size of the validation set is **4410*
+* The size of the validation set is **4410**
 * The size of test set is: **12630**
 * The shape of a traffic sign image is: **32x32x3**
 * The number of unique classes/labels in the data set is **42**
@@ -18,7 +18,9 @@ Below is the historams shows the distribution of the data for each type of traff
 
 
 
-![alt text][image1]
+![alt text][train_data.png]
+![alt text][test_data.png]
+![alt text][valid_data.png]
 
 ### Design and Test a Model Architecture
 
