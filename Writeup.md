@@ -74,14 +74,17 @@ I chose **Adam Optimizer** with learning rate **0.0005**.
 I use **batch size** of 32
 I use **number of epochs** of 100
 
+I started with learning rate 0.001 however the network did not reach the required accuracy for validation set, therefore I decided to reduce learning rate to 0.0005 in order to help the gradient descent find better optimal points. Later on after adding more layers to the network and the validation accuracy reached the required 93% value. I decided to stick with this learning rate.
+
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
 * training set accuracy of **100%**
-* validation set accuracy of **94%**
+* validation set accuracy of **95%**
 * test set accuracy of **92.2%**
 
- 
+I have been using the iterative process to come up with the final network architecture. Using the LeNet architecture as a starting point, I start increasing number of filters per convolution layers as well as adding more convolution layers to help the network learn more high level features and improve the validation accuracy. In order to help the network converge faster and avoid overfitting, I apply some optimization techniques like batch normalization and dropout between each convolution layers as well as fully connected layers. The keep probability for convolution is at 70% while the keep proablity for fully connected layer is at 60%. These are set back to 100% during inference. The network is trained for 100 epochs and reach 95% accuracy on validation set at the 90th epoch. However, the network reach 94% accuracy on validation set around the 41st epoch so we do not have much improvement from that on. I decided to stop at 100th epoch and use the result of the 90th epoch for the final evaluation. 
+
 
 ### Test a Model on New Images
 
@@ -89,12 +92,11 @@ My final model results were:
 
 Here are five German traffic signs that I found on the web:
 
-![alt text][image4] 
-![alt text][image5] 
-![alt text][image6] 
-![alt text][image7] 
-![alt text][image8]
-
+![alt text](sign_examples/31.jpg)
+![alt text](sign_examples/27.jpg)
+![alt text](sign_examples/23.jpg)
+![alt text](sign_examples/25.jpg)
+![alt text](sign_examples/12.jpg)
 The first image might be difficult to classify because ...
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
