@@ -97,7 +97,7 @@ Here are five German traffic signs that I found on the web:
 ![alt text](sign_examples/23.jpg)
 ![alt text](sign_examples/25.jpg)
 ![alt text](sign_examples/12.jpg)
-The first image might be difficult to classify because ...
+
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
