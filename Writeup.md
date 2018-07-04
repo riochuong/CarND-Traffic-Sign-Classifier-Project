@@ -80,21 +80,27 @@ I started with learning rate 0.001 however the network did not reach the require
 
 My final model results were:
 * training set accuracy of **100%**
-* validation set accuracy of **95%**
-* test set accuracy of **92.2%**
+* validation set accuracy of **98%**
+* test set accuracy of **99.2%**
 
-I have been using the iterative process to come up with the final network architecture. Using the LeNet architecture as a starting point, I start increasing number of filters per convolution layers as well as adding more convolution layers to help the network learn more high level features and improve the validation accuracy. In order to help the network converge faster and avoid overfitting, I apply some optimization techniques like batch normalization and dropout between each convolution layers as well as fully connected layers. The keep probability for convolution is at 70% while the keep proablity for fully connected layer is at 60%. These are set back to 100% during inference. The network is trained for 100 epochs and reach 95% accuracy on validation set at the 90th epoch. However, the network reach 94% accuracy on validation set around the 41st epoch so we do not have much improvement from that on. I decided to stop at 100th epoch and use the result of the 90th epoch for the final evaluation. 
+I have been using the iterative process to come up with the final network architecture. Using the LeNet architecture as a starting point, I start increasing number of filters per convolution layers as well as adding more convolution layers to help the network learn more high level features and improve the validation accuracy. In order to help the network converge faster and avoid overfitting, I apply some optimization techniques like batch normalization and dropout between each convolution layers as well as fully connected layers. The keep probability for convolution is at 70% while the keep proablity for fully connected layer is at 60%. These are set back to 100% during inference. The network is trained for 100 epochs and reach 95% accuracy on validation set at the 90th epoch. However, the network reach 98% accuracy on validation set around the 28th epoch so we do not have much improvement from that on. I decided to stop the training at 30th epoch.
+
+I did some investigation on all of the data set (train, validation, test) and found there are some very speicific image on validation and test sets for a sign that does not have any similar example on the train. Therefore, I decided to first merge all the data from three set, then shuffle and re-split them with similar initial ratios. This technique did help to improve might network accuracy a little bit.
+
+
 
 
 ### Test a Model on New Images
 
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic signs that I found on the web:
+Here are eight German traffic signs that I found on the web:
 
 ![alt text](sign_examples/31.jpg)
 ![alt text](sign_examples/27.jpg)
 ![alt text](sign_examples/23.jpg)
+![alt text](sign_examples/13.jpg)
+![alt text](sign_examples/38.jpg)
 ![alt text](sign_examples/25.jpg)
 ![alt text](sign_examples/12.jpg)
 
@@ -112,7 +118,12 @@ Here are the results of the prediction:
 | Priority Road			| Priority Road      							|
 
 
-The model was able to correctly guess 2 of the 5 traffic signs, which gives an accuracy of 40%. This accuracy is a little low in compares with the test set. It might due to the position of the sign and size of the sign that might cause the model some confusion.
+The model was able to correctly guess 5 of the 8 traffic signs, which gives an accuracy of 71.4%. This accuracy is a little low in compares with the test set. 
+
+There are multiple reasons for the wrong prediction on each image:
+* Number of train 
+* Position of the sign in the image.
+* Size of the sign in the image
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
