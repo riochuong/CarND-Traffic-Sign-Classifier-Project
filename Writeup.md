@@ -6,11 +6,13 @@
 
 I used numpy to explore the characteristics of the data:
 
-* The size of training set is **34799**
-* The size of the validation set is **4410**
-* The size of test set is: **12630**
+* The size of training set is **44322**
+* The size of the validation set is **4925**
+* The size of test set is: **2592**
 * The shape of a traffic sign image is: **32x32x3**
 * The number of unique classes/labels in the data set is **42**
+
+I did some investigation on all of the data set (train, validation, test) and found there are some very speicific image on validation and test sets for a sign that does not have any similar example on the train. Therefore, I decided to first merge all the data from three set, then shuffle and re-split them with similar initial ratios. This technique did help to improve might network accuracy a little bit. Also, the distribution of image number between train, test, and validation sets looks very similar even after splitting so I think it would not affect the final result of the network.
 
 #### 2. Include an exploratory visualization of the dataset.
 
@@ -85,10 +87,6 @@ My final model results were:
 
 I have been using the iterative process to come up with the final network architecture. Using the LeNet architecture as a starting point, I start increasing number of filters per convolution layers as well as adding more convolution layers to help the network learn more high level features and improve the validation accuracy. In order to help the network converge faster and avoid overfitting, I apply some optimization techniques like batch normalization and dropout between each convolution layers as well as fully connected layers. The keep probability for convolution is at 70% while the keep proablity for fully connected layer is at 60%. These are set back to 100% during inference. The network is trained for 100 epochs and reach 95% accuracy on validation set at the 90th epoch. However, the network reach 98% accuracy on validation set around the 28th epoch so we do not have much improvement from that on. I decided to stop the training at 30th epoch.
 
-I did some investigation on all of the data set (train, validation, test) and found there are some very speicific image on validation and test sets for a sign that does not have any similar example on the train. Therefore, I decided to first merge all the data from three set, then shuffle and re-split them with similar initial ratios. This technique did help to improve might network accuracy a little bit.
-
-
-
 
 ### Test a Model on New Images
 
@@ -111,64 +109,102 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-|Wild animal crossings	     		| Road Work  									| 
-| Pedestrians     			| Ahead only 										|
+|Wild animal crossings	     		| Ahead only 									| 
+| Pedestrians     			| Road narrows on the right										|
 | Slippery Road				| Slippery Road											|
-| Road work	      		| Right of way at next extension					 				|
+| Road work	      		| Road work					 				|
 | Priority Road			| Priority Road      							|
+| Keep Right | Keep Right |
+| Yield | Yield
 
 
-The model was able to correctly guess 5 of the 8 traffic signs, which gives an accuracy of 71.4%. This accuracy is a little low in compares with the test set. 
+The model was able to correctly guess 5 of the 7 traffic signs, which gives an accuracy of 71.4%. This accuracy is a little low in compares with the test set. 
 
 There are multiple reasons for the wrong prediction on each image:
-* Number of train 
+* Number of train, validation data.
+* Orientation of the sign (some signs has multiple orientations depends on the driving direction)
+* Multiple versions of the same sign.
 * Position of the sign in the image.
 * Size of the sign in the image
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
+All the wrong predictions are related to image that have signifcant less data on training set as well as having various orientations related to driving directions.
+
+
 For the **31.jpg** image which is "Wild and animal crossings" sign, the model predict
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .80         			| Road Work   									| 
-| .086     				| Road narrows on the right|
-| .017					| Right-of-way at the next intersection|
-| .015	      			|General caution|
-| .010				    | Traffic signals|
+| .639         			| Ahead only | 
+| .213     				| Turn right ahead|
+| .086					| Speed limit (70km/h)|
+| .020	      			|Go straight or right|
+| .014				    | Road narrows on the right|
+
+This image has less data than the other sign that are correctly predicted. 
+
+Also, this sign has multiple versions for different driving directions and type of animals causing it is hard to be generalized by the network 
+
 
 For the **27.jpg** image which is "Pedestrians" sign, the model predict
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .122         			| Ahead only   									| 
-| .121     				| Road work|
-| .096					| Speed limit (60km/h)|
-| .083	      			|General caution|
-| .070				    |Right-of-way at the next intersection|
+| .316         			| Road narrows on the right  					| 
+| .225     				| Road work|
+| .093					| Right-of-way at the next intersection|
+| .063	      			|Children crossing|
+| .060				    |Ahead only|
+
+This image also has less signifcant amount of training data that make the network cannot learn its features well enough. 
 
 For the **23.jpg** image which is "Slippery road" sign, the model predict
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .828        			| Slippery road   									| 
-| .100     				| Roundabout mandatory|
-| .019					| No entry|
-| .010	      			|Vehicles over 3.5 metric tons prohibited|
-| .008				    | Beware of ice/snow|
+| .40        			| Slippery road   									| 
+| .138     				| Roundabout mandatory|
+| .123					| Dangerous curve to the right|
+| .088	      			|Beware of ice/snow|
+| .071				    | Right-of-way at the next intersection|
+
+Initially, the network is not able to predict this image correctly also due to the limit number of training data. However, after applying gaussian blur with kernel 3x3, the network is able to guess it correctly although the probability is not as certain as other correct predictions.
+
+For the **13.jpg** image which is "Yield" sign, the model predict
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| .398         			| 	Yield| 
+| .172     				| Ahead only|
+| .073					| Priority road|
+| .047	      			|Speed limit (30km/h)|
+| .041				    | Speed limit (60km/h)|
 
 For the **25.jpg** image which is "Road work" sign, the model predict
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .513         			| Right-of-way at the next intersection| 
-| .182     				| Double curve|
-| .146					| Road work|
-| .038	      			|Children crossings|
-| .026				    | priority road|
+| .927         			| 	Road work| 
+| .043     				| Beware of ice/snow|
+| .008					| Dangerous curve to the right|
+| .006	      			|Right-of-way at the next intersection|
+| .003				    | Children crossing|
+
+For the **38.jpg** image which is "Keep right sign, the model predict
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| .959         			| 	Keep right| 
+| .002     				|Speed limit (50km/h)|
+| .001					| Speed limit (30km/h)|
+| .0008	      			|	Road work|
+| .0008				    | Turn left ahead|
 
 For the **12.jpg** image which is "Priority road" sign, the model predict
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
 | 1         			| Priority road   									| 
+
+
